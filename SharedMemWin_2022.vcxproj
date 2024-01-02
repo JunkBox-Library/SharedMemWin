@@ -27,9 +27,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectName>NetProtocol</ProjectName>
+    <ProjectName>SharedMemWin</ProjectName>
     <ProjectGuid>{683EF31A-DACE-49D6-9D89-C42F99BC3A65}</ProjectGuid>
-    <RootNamespace>NetProtocol</RootNamespace>
+    <RootNamespace>SharedMemWin</RootNamespace>
     <Keyword>MFCProj</Keyword>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
@@ -220,10 +220,10 @@
   <ItemGroup>
     <ClCompile Include="BufferRing.cpp" />
     <ClCompile Include="MainFrm.cpp" />
-    <ClCompile Include="NetProtocol.cpp" />
-    <ClCompile Include="NetProtocolDoc.cpp" />
-    <ClCompile Include="NetProtocolView.cpp" />
-    <ClCompile Include="NetSettingDLG.cpp" />
+    <ClCompile Include="MemSettingDLG.cpp" />
+    <ClCompile Include="SharedMemWin.cpp" />
+    <ClCompile Include="SharedMemWinDoc.cpp" />
+    <ClCompile Include="SharedMemWinView.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
@@ -235,30 +235,29 @@
   <ItemGroup>
     <ClInclude Include="BufferRing.h" />
     <ClInclude Include="MainFrm.h" />
-    <ClInclude Include="NetProtocol.h" />
-    <ClInclude Include="NetProtocolDoc.h" />
-    <ClInclude Include="NetProtocolView.h" />
-    <ClInclude Include="NetSettingDLG.h" />
+    <ClInclude Include="MemSettingDLG.h" />
+    <ClInclude Include="SharedMemWin.h" />
+    <ClInclude Include="SharedMemWinDoc.h" />
+    <ClInclude Include="SharedMemWinView.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="TCP_thread.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Netprotocol.ico" />
-    <None Include="res\NetProtocol.rc2" />
-    <None Include="res\NetProtocolDoc.ico" />
+    <None Include="res\SharedMemWin.ico" />
+    <None Include="res\SharedMemWin.rc2" />
+    <None Include="res\SharedMemWinDoc.ico" />
     <None Include="res\Toolbar.bmp" />
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="NetProtocol.rc" />
+    <ResourceCompile Include="SharedMemWin.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties RESOURCE_FILE="NetProtocol.rc" />
+      <UserProperties RESOURCE_FILE="SharedMemWin.rc" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

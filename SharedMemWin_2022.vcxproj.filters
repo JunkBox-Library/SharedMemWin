@@ -21,22 +21,22 @@
     <ClCompile Include="MainFrm.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="NetProtocol.cpp">
+    <ClCompile Include="SharedMemWin.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="NetProtocolDoc.cpp">
+    <ClCompile Include="SharedMemWinDoc.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="NetProtocolView.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="NetSettingDLG.cpp">
+    <ClCompile Include="SharedMemWinView.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="TCP_thread.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="MemSettingDLG.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -47,16 +47,13 @@
     <ClInclude Include="MainFrm.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="NetProtocol.h">
+    <ClInclude Include="SharedMemWin.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="NetProtocolDoc.h">
+    <ClInclude Include="SharedMemWinDoc.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="NetProtocolView.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
-    <ClInclude Include="NetSettingDLG.h">
+    <ClInclude Include="SharedMemWinView.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
@@ -68,24 +65,26 @@
     <ClInclude Include="TCP_thread.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="MemSettingDLG.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\Netprotocol.ico">
+    <None Include="res\SharedMemWin.ico">
       <Filter>リソース ファイル</Filter>
     </None>
-    <None Include="res\NetProtocol.rc2">
+    <None Include="res\SharedMemWin.rc2">
       <Filter>リソース ファイル</Filter>
     </None>
-    <None Include="res\NetProtocolDoc.ico">
+    <None Include="res\SharedMemWinDoc.ico">
       <Filter>リソース ファイル</Filter>
     </None>
     <None Include="res\Toolbar.bmp">
       <Filter>リソース ファイル</Filter>
     </None>
-    <None Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="NetProtocol.rc">
+    <ResourceCompile Include="SharedMemWin.rc">
       <Filter>リソース ファイル</Filter>
     </ResourceCompile>
   </ItemGroup>
