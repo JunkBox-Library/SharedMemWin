@@ -1,9 +1,9 @@
-﻿// NetSettingDLG.cpp : 実装ファイル
+﻿// MemSettingDLG.cpp : 実装ファイル
 //
 
 #include "stdafx.h"
-#include "NetProtocol.h"
-#include "NetSettingDLG.h"
+#include "SharedMemWin.h"
+#include "MemSettingDLG.h"
 
 #include "TCP_thread.h"
 
@@ -11,13 +11,13 @@ using namespace jbxl;
 //using namespace jbxwl;
 
 
-// NetSettingDLG ダイアログ
+// MemSettingDLG ダイアログ
 
-IMPLEMENT_DYNAMIC(NetSettingDLG, CDialog)
+IMPLEMENT_DYNAMIC(MemSettingDLG, CDialog)
 
 
-NetSettingDLG::NetSettingDLG(NetParam param, CWnd* pParent /*=NULL*/)
-    : CDialog(NetSettingDLG::IDD, pParent)
+MemSettingDLG::MemSettingDLG(NetParam param, CWnd* pParent /*=NULL*/)
+    : CDialog(MemSettingDLG::IDD, pParent)
 {
     netparam        = param;
     proxyMode       = netparam.proxymode;
@@ -37,24 +37,24 @@ NetSettingDLG::NetSettingDLG(NetParam param, CWnd* pParent /*=NULL*/)
 }
 
 
-NetSettingDLG::~NetSettingDLG()
+MemSettingDLG::~MemSettingDLG()
 {
 }
 
 
-void NetSettingDLG::DoDataExchange(CDataExchange* pDX)
+void MemSettingDLG::DoDataExchange(CDataExchange* pDX)
 {
     CDialog::DoDataExchange(pDX);
 }
 
 
-BEGIN_MESSAGE_MAP(NetSettingDLG, CDialog)
-    ON_BN_CLICKED(IDC_RADIO_PROXY, &NetSettingDLG::OnBnClickedRadioProxy)
-    ON_BN_CLICKED(IDC_RADIO_THROW, &NetSettingDLG::OnBnClickedRadioThrow)
+BEGIN_MESSAGE_MAP(MemSettingDLG, CDialog)
+    ON_BN_CLICKED(IDC_RADIO_PROXY, &MemSettingDLG::OnBnClickedRadioProxy)
+    ON_BN_CLICKED(IDC_RADIO_THROW, &MemSettingDLG::OnBnClickedRadioThrow)
 END_MESSAGE_MAP()
 
 
-BOOL   NetSettingDLG::OnInitDialog()
+BOOL   MemSettingDLG::OnInitDialog()
 {
     char buf[LMNAME];
 
@@ -85,7 +85,7 @@ BOOL   NetSettingDLG::OnInitDialog()
 }
 
 
-void NetSettingDLG::OnOK() 
+void MemSettingDLG::OnOK() 
 {
     char buf[LMNAME];
 
@@ -108,7 +108,7 @@ void NetSettingDLG::OnOK()
 }
 
 
-NetParam  NetSettingDLG::GetParameter()
+NetParam  MemSettingDLG::GetParameter()
 {
     NetParam  retparam;
 
@@ -123,7 +123,7 @@ NetParam  NetSettingDLG::GetParameter()
 }
 
 
-void NetSettingDLG::OnBnClickedRadioThrow()
+void MemSettingDLG::OnBnClickedRadioThrow()
 {
     char  buf[LMNAME];
 
@@ -138,7 +138,7 @@ void NetSettingDLG::OnBnClickedRadioThrow()
 }
 
 
-void NetSettingDLG::OnBnClickedRadioProxy()
+void MemSettingDLG::OnBnClickedRadioProxy()
 {
     throwModeCBox->SetCheck(BST_UNCHECKED);
     proxyModeCBox->SetCheck(BST_CHECKED);

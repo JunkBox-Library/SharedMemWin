@@ -11,8 +11,8 @@
 
 
 #include "BufferRing.h"
-#include "NetProtocolDoc.h"
-#include "NetProtocolView.h"
+#include "SharedMemWinDoc.h"
+#include "SharedMemWinView.h"
 
 #define   RELAY_NOSET   0    // 中継不能（未設定）
 #define   RELAY_STOP    1    // 中継準備ＯＫ
@@ -40,8 +40,8 @@ typedef struct {
     int*    p_state;
 
     HWND    hwnd;
-    CNetProtocolDoc*  pDoc;
-    CNetProtocolView* pView;
+    CSharedMemWinDoc*  pDoc;
+    CSharedMemWinView* pView;
 } NetParam;
 
 

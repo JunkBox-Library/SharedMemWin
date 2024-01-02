@@ -3,7 +3,7 @@
 
 #pragma once
 
-class  CNetProtocolApp;
+class  CSharedMemWinApp;
 
 class CMainFrame : public CFrameWnd
 {
@@ -12,7 +12,7 @@ protected: // シリアル化からのみ作成します。
     DECLARE_DYNCREATE(CMainFrame)
 
 public:
-    CNetProtocolApp*  pApp;
+    CSharedMemWinApp*  pApp;
 
 // オーバーライド
 public:
@@ -34,7 +34,7 @@ protected:  // コントロール バー用メンバ
 protected:
     afx_msg void  OnUpdateUiNetStart(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiNetStop(CCmdUI* pCmdUI);
-    afx_msg void  OnUpdateUiNetSetting(CCmdUI* pCmdUI);
+    afx_msg void  OnUpdateUiMemSetting(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiEditCopy(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiLogSave(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiLogClear(CCmdUI* pCmdUI);

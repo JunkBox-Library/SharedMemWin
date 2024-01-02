@@ -1,10 +1,10 @@
 ﻿//{{NO_DEPENDENCIES}}
 // Microsoft Visual C++ generated include file.
-// Used by NetProtocol.rc
+// Used by SharedMemWin.rc
 //
 #define IDD_ABOUTBOX                    100
 #define IDR_MAINFRAME                   128
-#define IDR_NetProtocolTYPE             129
+#define IDR_SharedMemWinTYPE            129
 #define IDD_NETSETTING_DIALOG           130
 #define IDC_RADIO_THROW                 1000
 #define IDC_RADIO_PROXY                 1001

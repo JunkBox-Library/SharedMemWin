@@ -1,4 +1,4 @@
-﻿// NetProtocolDoc.h : CNetProtocolDoc クラスのインターフェイス
+﻿// SharedMemWinDoc.h : CSharedMemWinDoc クラスのインターフェイス
 //
 
 #pragma once
@@ -9,22 +9,22 @@
 // 最大行数
 #define  MAXBUFFERLINE 50000
 
-class  CNetProtocolView;
-class  CNetProtocolApp;
+class  CSharedMemWinView;
+class  CSharedMemWinApp;
 
-class CNetProtocolDoc : public CDocument
+class CSharedMemWinDoc : public CDocument
 {
 protected: // シリアル化からのみ作成します。
-    CNetProtocolDoc();
-    DECLARE_DYNCREATE(CNetProtocolDoc)
+    CSharedMemWinDoc();
+    DECLARE_DYNCREATE(CSharedMemWinDoc)
 
 public:
     virtual BOOL OnNewDocument();
     virtual void Serialize(CArchive& ar);
-    CNetProtocolApp* pApp;
+    CSharedMemWinApp* pApp;
 
 public:
-    virtual ~CNetProtocolDoc();
+    virtual ~CSharedMemWinDoc();
 
 #ifdef _DEBUG
     virtual void AssertValid() const;
@@ -47,6 +47,6 @@ public:
     CString     easyGetSaveFileName(LPCSTR title, HWND hWnd);
 
     void        DeleteContents(void);
-    CNetProtocolView*  GetView(void);
+    CSharedMemWinView*  GetView(void);
 };
 

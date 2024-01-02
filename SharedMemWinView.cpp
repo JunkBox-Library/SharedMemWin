@@ -1,11 +1,11 @@
-﻿// NetProtocolView.cpp : CNetProtocolView クラスの実装
+﻿// SharedMemWinView.cpp : CSharedMemWinView クラスの実装
 //
 
 #include "stdafx.h"
-#include "NetProtocol.h"
+#include "SharedMemWin.h"
 
-#include "NetProtocolDoc.h"
-#include "NetProtocolView.h"
+#include "SharedMemWinDoc.h"
+#include "SharedMemWinView.h"
 
 
 #ifdef _DEBUG
@@ -17,9 +17,9 @@ using namespace jbxl;
 //using namespace jbxwl;
 
 
-IMPLEMENT_DYNCREATE(CNetProtocolView, CScrollView)
+IMPLEMENT_DYNCREATE(CSharedMemWinView, CScrollView)
 
-BEGIN_MESSAGE_MAP(CNetProtocolView, CScrollView)
+BEGIN_MESSAGE_MAP(CSharedMemWinView, CScrollView)
     ON_WM_CREATE() 
     ON_WM_DESTROY() 
     // 標準印刷コマンド
@@ -32,7 +32,7 @@ BEGIN_MESSAGE_MAP(CNetProtocolView, CScrollView)
 END_MESSAGE_MAP()
 
 
-CNetProtocolView::CNetProtocolView()
+CSharedMemWinView::CSharedMemWinView()
 {
     m_FontSizeX   = 0;
     m_FontSizeY   = 0;
@@ -54,25 +54,25 @@ CNetProtocolView::CNetProtocolView()
 }
 
 
-CNetProtocolView::~CNetProtocolView()
+CSharedMemWinView::~CSharedMemWinView()
 {    
-    //DEBUG_Error("ディストラクタ：IN  CNetProtocolView");
+    //DEBUG_Error("ディストラクタ：IN  CSharedMemWinView");
 
     pApp->m_state = RELAY_STOP;
 
-    //DEBUG_Error("ディストラクタ：OUT CNetProtocolView");
+    //DEBUG_Error("ディストラクタ：OUT CSharedMemWinView");
 }
 
 
-BOOL CNetProtocolView::PreCreateWindow(CREATESTRUCT& cs)
+BOOL CSharedMemWinView::PreCreateWindow(CREATESTRUCT& cs)
 {
     return CScrollView::PreCreateWindow(cs);
 }
 
 
-void CNetProtocolView::OnDraw(CDC* pDC)
+void CSharedMemWinView::OnDraw(CDC* pDC)
 {
-    CNetProtocolDoc* pDoc = GetDocument();
+    CSharedMemWinDoc* pDoc = GetDocument();
     if (!pDoc||pDoc->bufferRing==NULL) return;
 
     CBufferRing* pBR = pDoc->bufferRing;
@@ -128,7 +128,7 @@ void CNetProtocolView::OnDraw(CDC* pDC)
 }
 
 
-void  CNetProtocolView::setScrollPosition(CDC* pDC, CBufferRing* pBR)
+void  CSharedMemWinView::setScrollPosition(CDC* pDC, CBufferRing* pBR)
 {
     int lastPos = pBR->getLastPosition();
     if (m_DocLastPos==lastPos) return;
@@ -146,9 +146,9 @@ void  CNetProtocolView::setScrollPosition(CDC* pDC, CBufferRing* pBR)
 }
 
 
-void  CNetProtocolView::resetScrollSize()
+void  CSharedMemWinView::resetScrollSize()
 {
-    CNetProtocolDoc* pdoc = GetDocument();
+    CSharedMemWinDoc* pdoc = GetDocument();
     if (!pdoc || !pdoc->bufferRing) return;
     CBufferRing* pBR = pdoc->bufferRing;
     if (pBR->getMaxLineY()==0 || pBR->getMaxLineX()==0) return;
@@ -171,11 +171,11 @@ void  CNetProtocolView::resetScrollSize()
 }
 
 
-void  CNetProtocolView::OnInitialUpdate()
+void  CSharedMemWinView::OnInitialUpdate()
 {
     CScrollView::OnInitialUpdate();
 
-    CNetProtocolDoc* pDoc = GetDocument();
+    CSharedMemWinDoc* pDoc = GetDocument();
     if (!pDoc || pDoc->bufferRing==NULL) return;
     CBufferRing* pBR = pDoc->bufferRing;
 
@@ -199,9 +199,9 @@ void  CNetProtocolView::OnInitialUpdate()
 }
 
 
-void  CNetProtocolView::clearViewDoc()
+void  CSharedMemWinView::clearViewDoc()
 {
-    CNetProtocolDoc* pDoc = GetDocument();
+    CSharedMemWinDoc* pDoc = GetDocument();
     if (!pDoc || pDoc->bufferRing==NULL) return;
     CBufferRing* pBR = pDoc->bufferRing;
 
@@ -237,22 +237,22 @@ void  CNetProtocolView::clearViewDoc()
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// CNetProtocolView 印刷
+// CSharedMemWinView 印刷
 
-BOOL CNetProtocolView::OnPreparePrinting(CPrintInfo* pInfo)
+BOOL CSharedMemWinView::OnPreparePrinting(CPrintInfo* pInfo)
 {
     return DoPreparePrinting(pInfo);
 }
 
 
-void CNetProtocolView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
+void CSharedMemWinView::OnBeginPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
     // TODO: 印刷前の特別な初期化処理を追加してください。
 }
 
 
 
-void CNetProtocolView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
+void CSharedMemWinView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 {
     // TODO: 印刷後の後処理を追加してください。
 }
@@ -260,35 +260,35 @@ void CNetProtocolView::OnEndPrinting(CDC* /*pDC*/, CPrintInfo* /*pInfo*/)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// CNetProtocolView 診断
+// CSharedMemWinView 診断
 
 #ifdef _DEBUG
-void CNetProtocolView::AssertValid() const
+void CSharedMemWinView::AssertValid() const
 {
     CScrollView::AssertValid();
 }
 
 
-void CNetProtocolView::Dump(CDumpContext& dc) const
+void CSharedMemWinView::Dump(CDumpContext& dc) const
 {
     CScrollView::Dump(dc);
 }
 
 
-CNetProtocolDoc* CNetProtocolView::GetDocument() const // デバッグ以外のバージョンはインラインです。
+CSharedMemWinDoc* CSharedMemWinView::GetDocument() const // デバッグ以外のバージョンはインラインです。
 {
-    ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CNetProtocolDoc)));
-    return (CNetProtocolDoc*)m_pDocument;
+    ASSERT(m_pDocument->IsKindOf(RUNTIME_CLASS(CSharedMemWinDoc)));
+    return (CSharedMemWinDoc*)m_pDocument;
 }
 #endif //_DEBUG
 
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// CNetProtocolView メッセージ ハンドラ
+// CSharedMemWinView メッセージ ハンドラ
 // フォントの設定
 
-int CNetProtocolView::OnCreate(LPCREATESTRUCT lpcs)
+int CSharedMemWinView::OnCreate(LPCREATESTRUCT lpcs)
 {
     if (CScrollView::OnCreate(lpcs)==-1) return -1;
 
@@ -299,7 +299,7 @@ int CNetProtocolView::OnCreate(LPCREATESTRUCT lpcs)
 }
 
 
-void CNetProtocolView::OnDestroy(void)
+void CSharedMemWinView::OnDestroy(void)
 {
     m_ScreenFont.DeleteObject();
     CScrollView::OnDestroy();
@@ -310,7 +310,7 @@ void CNetProtocolView::OnDestroy(void)
 ////////////////////////////////////////////////////////////////////////////////////////////
 // Copy (& Paste)
 // 
-void  CNetProtocolView::OnLButtonDown(UINT nFlags, CPoint point)
+void  CSharedMemWinView::OnLButtonDown(UINT nFlags, CPoint point)
 {
     CPoint scrlpos = GetScrollPosition();
     m_msx     = point.x + scrlpos.x;
@@ -332,7 +332,7 @@ void  CNetProtocolView::OnLButtonDown(UINT nFlags, CPoint point)
 }
 
 
-void  CNetProtocolView::OnLButtonUp(UINT nFlags, CPoint point)
+void  CSharedMemWinView::OnLButtonUp(UINT nFlags, CPoint point)
 {
     m_mpress = FALSE;
 
@@ -340,7 +340,7 @@ void  CNetProtocolView::OnLButtonUp(UINT nFlags, CPoint point)
 }
 
 
-void  CNetProtocolView::OnMouseMove(UINT nFlags, CPoint point)
+void  CSharedMemWinView::OnMouseMove(UINT nFlags, CPoint point)
 {
     if (m_mpress) {
         CPoint scrlpos = GetScrollPosition();
@@ -360,11 +360,11 @@ void  CNetProtocolView::OnMouseMove(UINT nFlags, CPoint point)
 }
 
 
-CString  CNetProtocolView::getCopyData(void)
+CString  CSharedMemWinView::getCopyData(void)
 {
     CString ret = "";
 
-    CNetProtocolDoc* pdoc = GetDocument();
+    CSharedMemWinDoc* pdoc = GetDocument();
     if (!pdoc || !pdoc->bufferRing) return ret;
     CBufferRing* pBR = pdoc->bufferRing;
 
@@ -376,7 +376,7 @@ CString  CNetProtocolView::getCopyData(void)
 }
 
 
-BOOL  CNetProtocolView::OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll)
+BOOL  CSharedMemWinView::OnScroll(UINT nScrollCode, UINT nPos, BOOL bDoScroll)
 {
     SCROLLINFO info;
     info.cbSize = sizeof(SCROLLINFO);

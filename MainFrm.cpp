@@ -2,7 +2,7 @@
 //
 
 #include "stdafx.h"
-#include "NetProtocol.h"
+#include "SharedMemWin.h"
 #include "MainFrm.h"
 
 #ifdef _DEBUG
@@ -20,7 +20,7 @@ IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
     ON_UPDATE_COMMAND_UI(ID_NET_START,   &CMainFrame::OnUpdateUiNetStart)
     ON_UPDATE_COMMAND_UI(ID_NET_STOP,    &CMainFrame::OnUpdateUiNetStop)
-    ON_UPDATE_COMMAND_UI(ID_NET_SETTING, &CMainFrame::OnUpdateUiNetSetting)
+    ON_UPDATE_COMMAND_UI(ID_NET_SETTING, &CMainFrame::OnUpdateUiMemSetting)
     ON_UPDATE_COMMAND_UI(ID_EDIT_COPY,   &CMainFrame::OnUpdateUiEditCopy)
     ON_UPDATE_COMMAND_UI(ID_LOG_SAVE,    &CMainFrame::OnUpdateUiLogSave)
     ON_UPDATE_COMMAND_UI(ID_LOG_CLEAR,   &CMainFrame::OnUpdateUiLogClear)
@@ -182,7 +182,7 @@ void  CMainFrame::OnUpdateUiNetStop(CCmdUI* pCmdUI)
 }
 
 
-void  CMainFrame::OnUpdateUiNetSetting(CCmdUI* pCmdUI)
+void  CMainFrame::OnUpdateUiMemSetting(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 

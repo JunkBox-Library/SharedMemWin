@@ -1,11 +1,11 @@
-﻿// NetProtocol.cpp : アプリケーションのクラス動作を定義します。
+﻿// SharedMemWin.cpp : アプリケーションのクラス動作を定義します。
 //
 
 #include "stdafx.h"
-#include "NetProtocol.h"
+#include "SharedMemWin.h"
 
 #include "TCP_thread.h"
-#include "NetSettingDLG.h"
+#include "MemSettingDLG.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -18,15 +18,15 @@ using namespace jbxl;
 
 
 // Command
-BEGIN_MESSAGE_MAP(CNetProtocolApp, CWinApp)
-    ON_COMMAND(ID_EDIT_COPY,    &CNetProtocolApp::OnEditCopy)
-    ON_COMMAND(ID_NET_START,    &CNetProtocolApp::Server_Start)
-    ON_COMMAND(ID_NET_STOP,     &CNetProtocolApp::Server_Stop)
-    ON_COMMAND(ID_NET_SETTING,  &CNetProtocolApp::Server_Setting)
-    ON_COMMAND(ID_LOG_SAVE,     &CNetProtocolApp::OnLogSave)
-    ON_COMMAND(ID_LOG_SAVE_AS,  &CNetProtocolApp::OnLogSaveAs)
-    ON_COMMAND(ID_LOG_CLEAR,    &CNetProtocolApp::OnLogClear)
-    ON_COMMAND(ID_APP_ABOUT,    &CNetProtocolApp::OnAppAbout)
+BEGIN_MESSAGE_MAP(CSharedMemWinApp, CWinApp)
+    ON_COMMAND(ID_EDIT_COPY,    &CSharedMemWinApp::OnEditCopy)
+    ON_COMMAND(ID_NET_START,    &CSharedMemWinApp::Server_Start)
+    ON_COMMAND(ID_NET_STOP,     &CSharedMemWinApp::Server_Stop)
+    ON_COMMAND(ID_NET_SETTING,  &CSharedMemWinApp::Server_Setting)
+    ON_COMMAND(ID_LOG_SAVE,     &CSharedMemWinApp::OnLogSave)
+    ON_COMMAND(ID_LOG_SAVE_AS,  &CSharedMemWinApp::OnLogSaveAs)
+    ON_COMMAND(ID_LOG_CLEAR,    &CSharedMemWinApp::OnLogClear)
+    ON_COMMAND(ID_APP_ABOUT,    &CSharedMemWinApp::OnAppAbout)
     // 標準のファイル基本ドキュメント コマンド
     //ON_COMMAND(ID_FILE_NEW,  &CWinApp::OnFileNew)
     //ON_COMMAND(ID_FILE_OPEN, &CWinApp::OnFileOpen)
@@ -35,7 +35,7 @@ BEGIN_MESSAGE_MAP(CNetProtocolApp, CWinApp)
 END_MESSAGE_MAP()
 
 
-CNetProtocolApp::CNetProtocolApp()
+CSharedMemWinApp::CSharedMemWinApp()
 {    
     pMainFrame   = NULL;
     pMainDoc     = NULL;
@@ -62,9 +62,9 @@ CNetProtocolApp::CNetProtocolApp()
 }
 
 
-CNetProtocolApp::~CNetProtocolApp()
+CSharedMemWinApp::~CSharedMemWinApp()
 {
-    //DEBUG_Error("ディストラクタ：IN  CNetProtocolApp");
+    //DEBUG_Error("ディストラクタ：IN  CSharedMemWinApp");
 
     // for Network
     //if (m_netparam.ssock!=0) {
@@ -74,16 +74,16 @@ CNetProtocolApp::~CNetProtocolApp()
     Server_Stop();
     cleanup_network();
 
-    //DEBUG_Error("ディストラクタ：OUT CNetProtocolApp");
+    //DEBUG_Error("ディストラクタ：OUT CSharedMemWinApp");
 }
 
 
-// 唯一の CNetProtocolApp オブジェクトです。
-CNetProtocolApp theApp;
+// 唯一の CSharedMemWinApp オブジェクトです。
+CSharedMemWinApp theApp;
 
 
-// CNetProtocolApp 初期化
-BOOL CNetProtocolApp::InitInstance()
+// CSharedMemWinApp 初期化
+BOOL CSharedMemWinApp::InitInstance()
 {
     CWinApp::InitInstance();
 
@@ -93,9 +93,9 @@ BOOL CNetProtocolApp::InitInstance()
     CSingleDocTemplate* pDocTemplate;
     pDocTemplate = new CSingleDocTemplate(
         IDR_MAINFRAME,
-        RUNTIME_CLASS(CNetProtocolDoc),
+        RUNTIME_CLASS(CSharedMemWinDoc),
         RUNTIME_CLASS(CMainFrame),       // メイン SDI フレーム ウィンドウ
-        RUNTIME_CLASS(CNetProtocolView));
+        RUNTIME_CLASS(CSharedMemWinView));
     if (!pDocTemplate) return FALSE;
     AddDocTemplate(pDocTemplate);
 
@@ -115,8 +115,8 @@ BOOL CNetProtocolApp::InitInstance()
 
     // Frame
     pMainFrame = (CMainFrame*)m_pMainWnd;
-    pMainDoc   = (CNetProtocolDoc*)pMainFrame->GetActiveDocument();
-    pMainView  = ((CNetProtocolDoc*)pMainDoc)->GetView();
+    pMainDoc   = (CSharedMemWinDoc*)pMainFrame->GetActiveDocument();
+    pMainView  = ((CSharedMemWinDoc*)pMainDoc)->GetView();
 
     pMainFrame->pApp = this;
     pMainDoc->pApp   = this;
@@ -163,7 +163,7 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialog)
 END_MESSAGE_MAP()
 
 
-void  CNetProtocolApp::OnLogSave()
+void  CSharedMemWinApp::OnLogSave()
 {
     if (pMainDoc->save_fname=="") {
         pMainDoc->save_fname = pMainDoc->easyGetSaveFileName("保存用ファイルを指定する", m_pMainWnd->m_hWnd);
@@ -175,7 +175,7 @@ void  CNetProtocolApp::OnLogSave()
 }
 
 
-void  CNetProtocolApp::OnLogSaveAs()
+void  CSharedMemWinApp::OnLogSaveAs()
 {
     pMainDoc->save_fname = "";
 
@@ -183,7 +183,7 @@ void  CNetProtocolApp::OnLogSaveAs()
 }
 
 
-void  CNetProtocolApp::OnEditCopy()
+void  CSharedMemWinApp::OnEditCopy()
 {
     CString data = pMainView->getCopyData();
     if (data=="") return;
@@ -212,16 +212,16 @@ void  CNetProtocolApp::OnEditCopy()
 
 
 // ダイアログを実行するためのアプリケーション コマンド
-void  CNetProtocolApp::OnAppAbout()
+void  CSharedMemWinApp::OnAppAbout()
 {
     CAboutDlg aboutDlg;
     aboutDlg.DoModal();
 }
 
 
-// CNetProtocolApp メッセージ ハンドラ
+// CSharedMemWinApp メッセージ ハンドラ
 
-void  CNetProtocolApp::Server_Start()
+void  CSharedMemWinApp::Server_Start()
 {
     if (m_state!=RELAY_STOP) return;
 
@@ -244,7 +244,7 @@ void  CNetProtocolApp::Server_Start()
 }
 
 
-void  CNetProtocolApp::Server_Stop()
+void  CSharedMemWinApp::Server_Stop()
 {
     m_state = RELAY_STOP;
     if (m_netparam.ssock>0) {
@@ -254,9 +254,9 @@ void  CNetProtocolApp::Server_Stop()
 }
 
 
-void  CNetProtocolApp::Server_Setting()
+void  CSharedMemWinApp::Server_Setting()
 {
-    NetSettingDLG* nstdlg = new NetSettingDLG(m_netparam);
+    MemSettingDLG* nstdlg = new MemSettingDLG(m_netparam);
     if (nstdlg==NULL) return;
     
     if (nstdlg->DoModal()==IDOK) {
@@ -291,7 +291,7 @@ void  CNetProtocolApp::Server_Setting()
 }
 
 
-void  CNetProtocolApp::OnLogClear()
+void  CSharedMemWinApp::OnLogClear()
 {
     int ret = MessageBox(m_pMainWnd->m_hWnd, "ログをクリアしますか？", "Log Clear", MB_YESNO | MB_ICONQUESTION);
     if (ret==IDYES) pMainView->clearViewDoc();

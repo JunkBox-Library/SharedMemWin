@@ -1,4 +1,4 @@
-﻿// NetProtocol.h : NetProtocol アプリケーションのメイン ヘッダー ファイル
+﻿// SharedMemWin.h : SharedMemWin アプリケーションのメイン ヘッダー ファイル
 //
 #pragma once
 
@@ -9,22 +9,22 @@
 #include "resource.h"       // メイン シンボル
 
 #include "MainFrm.h"
-#include "NetProtocolDoc.h"
-#include "NetProtocolView.h"
+#include "SharedMemWinDoc.h"
+#include "SharedMemWinView.h"
 
 #include "TCP_thread.h"
 
 
-class CNetProtocolApp : public CWinApp
+class CSharedMemWinApp : public CWinApp
 {
 public:
-    CNetProtocolApp();
-    ~CNetProtocolApp();
+    CSharedMemWinApp();
+    ~CSharedMemWinApp();
 
 public:
     CMainFrame*         pMainFrame;
-    CNetProtocolDoc*    pMainDoc;
-    CNetProtocolView*   pMainView;
+    CSharedMemWinDoc*    pMainDoc;
+    CSharedMemWinView*   pMainView;
 
     NetParam            m_netparam;
     CWinThread*         m_server_thr;
@@ -51,5 +51,5 @@ public:
 };
 
 
-extern CNetProtocolApp theApp;
+extern CSharedMemWinApp theApp;
 

@@ -1,4 +1,4 @@
-﻿// NetProtocolView.h : CNetProtocolView クラスのインターフェイス
+﻿// SharedMemWinView.h : CSharedMemWinView クラスのインターフェイス
 //
 
 #pragma once
@@ -7,18 +7,18 @@
 
 #define  DISPLAY_MARGIN  5
 
-class  CNetProtocolDoc;
-class  CNetProtocolApp;
+class  CSharedMemWinDoc;
+class  CSharedMemWinApp;
 
-class CNetProtocolView : public CScrollView
+class CSharedMemWinView : public CScrollView
 {
 protected: // シリアル化からのみ作成します。
-    CNetProtocolView();
-    DECLARE_DYNCREATE(CNetProtocolView)
+    CSharedMemWinView();
+    DECLARE_DYNCREATE(CSharedMemWinView)
 
 public:
-    CNetProtocolDoc* GetDocument() const;
-    CNetProtocolApp* pApp;
+    CSharedMemWinDoc* GetDocument() const;
+    CSharedMemWinApp* pApp;
 
 // オーバーライド
 public:
@@ -31,7 +31,7 @@ protected:
     virtual  void    OnEndPrinting(CDC* pDC, CPrintInfo* pInfo);
 
 public:
-    virtual ~CNetProtocolView();
+    virtual ~CSharedMemWinView();
 
 #ifdef _DEBUG
     virtual  void    AssertValid() const;
@@ -81,8 +81,8 @@ public:
 };
 
 
-#ifndef _DEBUG  // NetProtocolView.cpp のデバッグ バージョン
-inline CNetProtocolDoc* CNetProtocolView::GetDocument() const
-   { return reinterpret_cast<CNetProtocolDoc*>(m_pDocument); }
+#ifndef _DEBUG  // SharedMemWinView.cpp のデバッグ バージョン
+inline CSharedMemWinDoc* CSharedMemWinView::GetDocument() const
+   { return reinterpret_cast<CSharedMemWinDoc*>(m_pDocument); }
 #endif
 

@@ -1,10 +1,10 @@
-﻿// NetProtocolDoc.cpp : CNetProtocolDoc クラスの実装
+﻿// SharedMemWinDoc.cpp : CSharedMemWinDoc クラスの実装
 //
 
 #include "stdafx.h"
-#include "NetProtocol.h"
+#include "SharedMemWin.h"
 
-#include "NetProtocolDoc.h"
+#include "SharedMemWinDoc.h"
 
 
 #ifdef _DEBUG
@@ -16,17 +16,17 @@ using namespace jbxl;
 //using namespace jbxwl;
 
 
-// CNetProtocolDoc
+// CSharedMemWinDoc
 
-IMPLEMENT_DYNCREATE(CNetProtocolDoc, CDocument)
+IMPLEMENT_DYNCREATE(CSharedMemWinDoc, CDocument)
 
-BEGIN_MESSAGE_MAP(CNetProtocolDoc, CDocument)
+BEGIN_MESSAGE_MAP(CSharedMemWinDoc, CDocument)
 END_MESSAGE_MAP()
 
 
-// CNetProtocolDoc コンストラクション/デストラクション
+// CSharedMemWinDoc コンストラクション/デストラクション
 
-CNetProtocolDoc::CNetProtocolDoc()
+CSharedMemWinDoc::CSharedMemWinDoc()
 {
     save_fname = "";
     pApp = NULL;
@@ -35,18 +35,18 @@ CNetProtocolDoc::CNetProtocolDoc()
 }
 
 
-CNetProtocolDoc::~CNetProtocolDoc()
+CSharedMemWinDoc::~CSharedMemWinDoc()
 {
-    //DEBUG_Error("ディストラクタ：IN  CNetProtocolDoc");
+    //DEBUG_Error("ディストラクタ：IN  CSharedMemWinDoc");
 
     pApp->m_state = RELAY_STOP;
-    CNetProtocolDoc::free();
+    CSharedMemWinDoc::free();
 
-    //DEBUG_Error("ディストラクタ：OUT CNetProtocolDoc");
+    //DEBUG_Error("ディストラクタ：OUT CSharedMemWinDoc");
 }
 
 
-void  CNetProtocolDoc::free(void)
+void  CSharedMemWinDoc::free(void)
 {
     if (bufferRing!=NULL) {
         delete(bufferRing);
@@ -55,7 +55,7 @@ void  CNetProtocolDoc::free(void)
 }
 
 
-BOOL CNetProtocolDoc::OnNewDocument()
+BOOL CSharedMemWinDoc::OnNewDocument()
 {
     if (!CDocument::OnNewDocument()) return FALSE;
     return TRUE;
@@ -64,9 +64,9 @@ BOOL CNetProtocolDoc::OnNewDocument()
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// CNetProtocolDoc シリアル化
+// CSharedMemWinDoc シリアル化
 
-void CNetProtocolDoc::Serialize(CArchive& ar)
+void CSharedMemWinDoc::Serialize(CArchive& ar)
 {
     if (ar.IsStoring())
     {
@@ -81,16 +81,16 @@ void CNetProtocolDoc::Serialize(CArchive& ar)
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// CNetProtocolDoc 診断
+// CSharedMemWinDoc 診断
 
 #ifdef _DEBUG
-void CNetProtocolDoc::AssertValid() const
+void CSharedMemWinDoc::AssertValid() const
 {
     CDocument::AssertValid();
 }
 
 
-void CNetProtocolDoc::Dump(CDumpContext& dc) const
+void CSharedMemWinDoc::Dump(CDumpContext& dc) const
 {
     CDocument::Dump(dc);
 }
@@ -99,28 +99,28 @@ void CNetProtocolDoc::Dump(CDumpContext& dc) const
 
 
 ///////////////////////////////////////////////////////////////////////////////
-// CNetProtocolDoc コマンド
+// CSharedMemWinDoc コマンド
 
-void CNetProtocolDoc::DeleteContents(void)
+void CSharedMemWinDoc::DeleteContents(void)
 {
-    //CNetProtocolDoc::clear();
-    //DEBUG_Warning("CNetProtocolDoc::DeleteContents: IN");
+    //CSharedMemWinDoc::clear();
+    //DEBUG_Warning("CSharedMemWinDoc::DeleteContents: IN");
     CDocument::DeleteContents();
 }
 
 
-CNetProtocolView*  CNetProtocolDoc::GetView(void)
+CSharedMemWinView*  CSharedMemWinDoc::GetView(void)
 {
     POSITION pos = GetFirstViewPosition();
     while (pos!=NULL) {
-        CNetProtocolView* pview = (CNetProtocolView*)GetNextView(pos);
+        CSharedMemWinView* pview = (CSharedMemWinView*)GetNextView(pos);
         if (this==pview->GetDocument()) return pview;
     }
     return NULL;
 }
 
 
-void  CNetProtocolDoc::clear(void)
+void  CSharedMemWinDoc::clear(void)
 {
     save_fname = "";
 
@@ -138,7 +138,7 @@ void  CNetProtocolDoc::clear(void)
 }
 
 
-int   CNetProtocolDoc::writeLogFile(void)
+int   CSharedMemWinDoc::writeLogFile(void)
 {
     if (save_fname=="") return -1;
 
@@ -169,7 +169,7 @@ int   CNetProtocolDoc::writeLogFile(void)
 }
 
 
-CString  CNetProtocolDoc::easyGetSaveFileName(LPCSTR title, HWND hWnd) 
+CString  CSharedMemWinDoc::easyGetSaveFileName(LPCSTR title, HWND hWnd) 
 {    
     OPENFILENAME  ofn;
     char fn[LNAME];

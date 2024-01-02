@@ -6,7 +6,7 @@
 #include "http_tool.h"
 
 #include "TCP_thread.h"
-#include "NetProtocol.h"
+#include "SharedMemWin.h"
 
 
 using namespace jbxl;
@@ -50,7 +50,7 @@ UINT  ntpl_server(LPVOID pntprm)
 UINT  ntpl_relay(LPVOID pntprm)
 {
     NetParam netparam = *(NetParam*)pntprm;
-    CNetProtocolDoc*  pDoc = netparam.pDoc;
+    CSharedMemWinDoc*  pDoc = netparam.pDoc;
 
     if (pDoc==NULL || pDoc->bufferRing==NULL) {
         DEBUG_ERROR("ntpl_relay: ERROR: nothing pDoc or pDoc->bufferRing");

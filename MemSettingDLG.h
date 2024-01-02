@@ -1,14 +1,14 @@
 ﻿#pragma once
 
-// NetSettingDLG ダイアログ
+// MemSettingDLG ダイアログ
 
-class NetSettingDLG : public CDialog
+class MemSettingDLG : public CDialog
 {
-    DECLARE_DYNAMIC(NetSettingDLG)
+    DECLARE_DYNAMIC(MemSettingDLG)
 
 public:
-    NetSettingDLG(NetParam netparam, CWnd* pParent = NULL);   // 標準コンストラクタ
-    virtual ~NetSettingDLG();
+    MemSettingDLG(NetParam netparam, CWnd* pParent = NULL);   // 標準コンストラクタ
+    virtual ~MemSettingDLG();
 
     virtual BOOL  OnInitDialog();
 
