@@ -18,7 +18,8 @@
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 #ifdef _WIN32
 LANGUAGE LANG_JAPANESE, SUBLANG_DEFAULT
-#pragma code_page(932)
+//#pragma code_page(932)
+#pragma code_page(6500)
 #endif //_WIN32
 
 #ifdef APSTUDIO_INVOKED
@@ -47,7 +48,7 @@ BEGIN
 "\r\n"
 "#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)\r\n"
 "LANGUAGE 17, 1\r\n"
-"#pragma code_page(932)\r\n"
+"#pragma code_page(65001)\r\n"
 "#include ""res\\SharedMemWin.rc2""  // Microsoft Visual C++ 以外で編集されたリソース\r\n"
 "#include ""afxres.rc""         // 標準コンポーネント\r\n"
 "#include ""afxprint.rc""       // 印刷/印刷プレビュー リソース\r\n"
@@ -210,7 +211,7 @@ END
 END
 BLOCK "VarFileInfo"
 BEGIN
-VALUE "Translation", 0x411, 932
+VALUE "Translation", 0x411, 65001
 END
 END
 
@@ -378,7 +379,7 @@ END
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_JPN)
 LANGUAGE 17, 1
-#pragma code_page(932)
+#pragma code_page(65001)
 #include "res\SharedMemWin.rc2"  // Microsoft Visual C++ 以外で編集されたリソース
 #include "afxres.rc"         // 標準コンポーネント
 #include "afxprint.rc"       // 印刷/印刷プレビュー リソース
