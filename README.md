@@ -1,3 +1,6 @@
 # SharedMemWin
 
 Debug Tool for JunkBox_Lib++ and JunkBox_Win_Lib with VS.
+
+- 現在まだ構築中...
+- Under Constructing...
