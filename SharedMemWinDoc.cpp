@@ -152,7 +152,9 @@ int   CSharedMemWinDoc::writeLogFile(void)
     
     int size = 0;
     //FILE* fp = fopen((LPCSTR)save_fname, "wb");
-    FILE* fp = fopen(jbxwl::ts2mbs(save_fname), "wb");
+    char* fname = jbxwl::ts2mbs(save_fname);
+    FILE* fp = fopen(fname, "wb");
+    freeNull(fname);
     if (fp==NULL) {
         lock.Unlock();
         return -2;
@@ -184,10 +186,10 @@ CString  CSharedMemWinDoc::easyGetSaveFileName(LPCSTR title, HWND hWnd)
     ofn.Flags = 0;
     ofn.lpstrFile = (LPWSTR)fn;
     ofn.nMaxFile  = LNAME;
-    if (title!=NULL) ofn.lpstrTitle = (LPWSTR)title;
+    if (title!=NULL) ofn.lpstrTitle = (LPCWSTR)title;
 
     BOOL ret = GetSaveFileName(&ofn);
     if (ret) str = fn;
 
-    return  (LPCWSTR)fn;
+    return (LPWSTR)fn;
 }
