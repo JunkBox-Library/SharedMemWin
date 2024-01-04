@@ -105,10 +105,10 @@ void CSharedMemWinView::OnDraw(CDC* pDC)
             pDC->SetBkColor(RGB(255,255,255));
         }
 
-        if (buf.state==CLIENT_DATA) {
+        if (buf.state==WARN_DATA) {
             pDC->SetTextColor(RGB(20,20,200));
         }
-        else if (buf.state==SERVER_DATA) {
+        else if (buf.state==ERROR_DATA) {
             pDC->SetTextColor(RGB(200,20,20));
         }
         else {

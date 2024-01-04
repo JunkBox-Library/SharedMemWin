@@ -4,7 +4,7 @@
 #include "stdafx.h"
 #include "SharedMemWin.h"
 
-#include "TCP_thread.h"
+#include "SHM_thread.h"
 #include "MemSettingDLG.h"
 
 #ifdef _DEBUG
@@ -37,28 +37,17 @@ END_MESSAGE_MAP()
 
 CSharedMemWinApp::CSharedMemWinApp()
 {    
-    pMainFrame   = NULL;
-    pMainDoc     = NULL;
-    m_server_thr = NULL;
-    m_state      = SHM_NOSET;
+    pMainFrame = NULL;
+    pMainDoc   = NULL;
+    pShm       = NULL;
+    p_shm_thr  = NULL;
+    m_state    = SHM_NOSET;
 
-    //m_netparam.hostname = "proxy.edu.tuis.ac.jp";
-    //m_netparam.cport    = 8080;
-    m_netparam.hostname   = "";
-    m_netparam.cport      = 0;
-    
-    m_netparam.sport      = 9100;
-    m_netparam.ssock      = 0;
-    m_netparam.nsock      = 0;
-    m_netparam.csock      = 0;
-
-    m_netparam.proxymode  = FALSE;
-    m_netparam.binhexmode = FALSE;
-
-    m_netparam.p_state    = &m_state;
-    m_netparam.hwnd       = NULL;
-    m_netparam.pDoc       = NULL;
-    m_netparam.pView      = NULL;
+    m_shmparam.p_state = &m_state;
+    m_shmparam.hwnd    = NULL;
+    m_shmparam.pDoc    = NULL;
+    m_shmparam.pView   = NULL;
+    m_shmparam.pShm    = NULL;
 }
 
 
@@ -67,9 +56,9 @@ CSharedMemWinApp::~CSharedMemWinApp()
     //DEBUG_Error("ディストラクタ：IN  CSharedMemWinApp");
 
     // for Network
-    //if (m_netparam.ssock!=0) {
-    //    socket_close(m_netparam.ssock);
-    //    m_netparam.ssock = 0;
+    //if (m_p_shmparam->ssock!=0) {
+    //    socket_close(m_p_shmparam->ssock);
+    //    m_p_shmparam->ssock = 0;
     //}
     SHM_Stop();
     cleanup_network();
@@ -225,15 +214,15 @@ void  CSharedMemWinApp::SHM_Start()
 {
     if (m_state!=SHM_STOP) return;
 
-    pMainDoc->shm = new jbxwl::CWinSharedMem();
-
-    if (pMainDoc->shm = NULL) {
+    pShm = new jbxwl::CWinSharedMem("jbxwl_DEBUGGER");
+    if (pShm = NULL) {
         MessageBox(m_pMainWnd->m_hWnd, "SHM_Setart: 共有メモリをオープンできません", "エラー", MB_OK);
     }
     else {
         m_state = SHM_EXEC;
-        m_server_thr = AfxBeginThread(ntpl_server, &m_netparam);
-        if (m_server_thr==NULL) m_state = SHM_STOP;
+        m_shmparam.pShm = pShm;
+        p_shm_thr = AfxBeginThread(shm_reader, &m_shmparam);
+        if (p_shm_thr==NULL) m_state = SHM_STOP;
     }
     return;
 }
@@ -243,46 +232,28 @@ void  CSharedMemWinApp::SHM_Stop()
 {
     m_state = SHM_STOP;
 
-    if (pMainDoc->shm!=NULL) {
-        delete(pMainDoc->shm);
-        pMainDoc->shm = NULL;
+    if (pShm!=NULL) {
+        delete(pShm);
+        pShm = NULL;
+        m_shmparam.pShm = NULL;
     }
 }
 
 
 void  CSharedMemWinApp::SHM_Setting()
 {
-    MemSettingDLG* nstdlg = new MemSettingDLG(m_netparam);
-    if (nstdlg==NULL) return;
+    MemSettingDLG* shmdlg = new MemSettingDLG(m_shmparam);
+    if (shmdlg==NULL) return;
     
-    if (nstdlg->DoModal()==IDOK) {
-        m_netparam = nstdlg->GetParameter();
-        m_netparam.pDoc  = pMainDoc;
-        m_netparam.pView = pMainView;
-        m_netparam.hwnd  = m_pMainWnd->m_hWnd;
+    if (shmdlg->DoModal()==IDOK) {
+        m_shmparam = shmdlg->GetParameter();
+        m_shmparam.pDoc  = pMainDoc;
+        m_shmparam.pView = pMainView;
+        m_shmparam.hwnd  = m_pMainWnd->m_hWnd;
         m_state = SHM_NOSET;
-
-        if (!m_netparam.proxymode) {
-            if (m_netparam.sport<=0 || m_netparam.hostname=="") {
-                MessageBox(m_pMainWnd->m_hWnd, "Server_Setting: 不正なリモートホストが指定されました", "エラー", MB_OK);
-            }
-            else {
-                int cofd = tcp_client_socket((char*)(LPCSTR)(m_netparam.hostname), m_netparam.cport);
-                if (cofd>0) {
-                    socket_close(cofd);
-                    m_state = SHM_STOP;
-                }
-                else {
-                    MessageBox(m_pMainWnd->m_hWnd, "Server_Setting: リモートホストに接続できません", "エラー", MB_OK);
-                }
-            }
-        }
-        else {
-            m_state = SHM_STOP;
-        }
     }
 
-    delete(nstdlg);
+    delete(shmdlg);
     return;
 }
 

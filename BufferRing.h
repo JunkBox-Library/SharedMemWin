@@ -17,34 +17,34 @@
 
 // inputSrc
 #define  OPERATION_DATA     0
-#define  SERVER_DATA        1
-#define  CLIENT_DATA        2
-#define  PROXY_DATA         3
+#define  INFO_DATA          1
+#define  WARN_DATA          2
+#define  ERROR_DATA         3
 
 
 class CBufferRing
 {
 public:
-    CBufferRing(int size) { init(size);}
+    CBufferRing(int size) { init(size); }
     ~CBufferRing(void);
 
 public:
     int     init(int size);
     void    clear(void);
-    void    putBufferRing(Buffer buf, int input, int kind=BINHEX_DATA);
+    void    putBufferRing(Buffer* buf, int input, int kind = BINHEX_DATA);
     void    rewriteBinHexBufferRing(int n, int input);
 
     Buffer  getBufferRing(void);
     Buffer  getBufferRing(int pos);
 
-    int     getMaxBufSize(void)      { return maxBufSize;}
-    int     getMaxLineX(void)        { return maxLineX;}
-    int     getMaxLineY(void)        { return maxLineY;}
-    int     getTotalSize(void)       { return tlDataSize;}
-    int     getLastPosition(void)    { return wPos;}
+    int     getMaxBufSize(void)   { return maxBufSize; }
+    int     getMaxLineX(void)     { return maxLineX; }
+    int     getMaxLineY(void)     { return maxLineY; }
+    int     getTotalSize(void)    { return tlDataSize; }
+    int     getLastPosition(void) { return wPos; }
 
-    int     getLengthX(int n)        { if(n<0) n+=maxBufSize; return (int)strlen((const char*)pBuf[n%maxBufSize].buf);}
-    int     getKindData(int n)       { if(n<0) n+=maxBufSize; return kindData[n%maxBufSize];}
+    int     getLengthX(int n)  { if (n < 0) n += maxBufSize; return (int)strlen((const char*)pBuf[n % maxBufSize].buf); }
+    int     getKindData(int n) { if (n < 0) n += maxBufSize; return kindData[n % maxBufSize]; }
 
 public:
     Buffer* pBuf;
@@ -60,8 +60,8 @@ protected:
     int     rPos;
     int     wPos;
 
-    int*    kindData;        //
-    int*    inputSrc;        //
+    int* kindData;        //
+    int* inputSrc;        //
 };
 
 

@@ -2,8 +2,8 @@
 //
 
 #include "stdafx.h"
-#include "SharedMemWin.h"
 
+#include "SharedMemWin.h"
 #include "SharedMemWinDoc.h"
 
 

@@ -18,9 +18,9 @@ using namespace jbxl;
 IMPLEMENT_DYNCREATE(CMainFrame, CFrameWnd)
 
 BEGIN_MESSAGE_MAP(CMainFrame, CFrameWnd)
-    ON_UPDATE_COMMAND_UI(ID_NET_START,   &CMainFrame::OnUpdateUiNetStart)
-    ON_UPDATE_COMMAND_UI(ID_NET_STOP,    &CMainFrame::OnUpdateUiNetStop)
-    ON_UPDATE_COMMAND_UI(ID_NET_SETTING, &CMainFrame::OnUpdateUiMemSetting)
+    ON_UPDATE_COMMAND_UI(ID_SHM_START,   &CMainFrame::OnUpdateUiShmStart)
+    ON_UPDATE_COMMAND_UI(ID_SHM_STOP,    &CMainFrame::OnUpdateUiShmStop)
+    ON_UPDATE_COMMAND_UI(ID_SHM_SETTING, &CMainFrame::OnUpdateUiShmSetting)
     ON_UPDATE_COMMAND_UI(ID_EDIT_COPY,   &CMainFrame::OnUpdateUiEditCopy)
     ON_UPDATE_COMMAND_UI(ID_LOG_SAVE,    &CMainFrame::OnUpdateUiLogSave)
     ON_UPDATE_COMMAND_UI(ID_LOG_CLEAR,   &CMainFrame::OnUpdateUiLogClear)
@@ -128,28 +128,28 @@ void  CMainFrame::OnInitMenu(CMenu* pMenu)
 {
     if (pMenu==NULL) pMenu = GetMenu();
 
-    if (pApp->m_state==SHM_NOSET) {        // 中継不能（未設定）
-        pMenu->EnableMenuItem(ID_NET_START,   MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
-        pMenu->EnableMenuItem(ID_NET_STOP,    MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
-        pMenu->EnableMenuItem(ID_NET_SETTING, MF_BYCOMMAND | MF_ENABLED);
-        //m_wndToolBar.GetToolBarCtrl().EnableButton(ID_NET_START, FALSE);
+    if (pApp->m_state==SHM_NOSET) {        // 読込不能（未設定）
+        pMenu->EnableMenuItem(ID_SHM_START,   MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
+        pMenu->EnableMenuItem(ID_SHM_STOP,    MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
+        pMenu->EnableMenuItem(ID_SHM_SETTING, MF_BYCOMMAND | MF_ENABLED);
+        //m_wndToolBar.GetToolBarCtrl().EnableButton(ID_SHM_START, FALSE);
     }
-    else if (pApp->m_state==SHM_STOP) {    // 中継準備ＯＫ
-        pMenu->EnableMenuItem(ID_NET_START,   MF_BYCOMMAND | MF_ENABLED);
-        pMenu->EnableMenuItem(ID_NET_STOP,    MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
-        pMenu->EnableMenuItem(ID_NET_SETTING, MF_BYCOMMAND | MF_ENABLED);
+    else if (pApp->m_state==SHM_STOP) {    // 読込準備ＯＫ
+        pMenu->EnableMenuItem(ID_SHM_START,   MF_BYCOMMAND | MF_ENABLED);
+        pMenu->EnableMenuItem(ID_SHM_STOP,    MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
+        pMenu->EnableMenuItem(ID_SHM_SETTING, MF_BYCOMMAND | MF_ENABLED);
     }
-    else if (pApp->m_state==SHM_EXEC) {    // 中継中
-        pMenu->EnableMenuItem(ID_NET_START,      MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
-        pMenu->EnableMenuItem(ID_NET_STOP,    MF_BYCOMMAND | MF_ENABLED);
-        pMenu->EnableMenuItem(ID_NET_SETTING, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED); 
+    else if (pApp->m_state==SHM_EXEC) {    // 読込中
+        pMenu->EnableMenuItem(ID_SHM_START,   MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
+        pMenu->EnableMenuItem(ID_SHM_STOP,    MF_BYCOMMAND | MF_ENABLED);
+        pMenu->EnableMenuItem(ID_SHM_SETTING, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED); 
     }
 
     CFrameWnd::OnInitMenu(pMenu);
 }
 
 
-void  CMainFrame::OnUpdateUiNetStart(CCmdUI* pCmdUI)
+void  CMainFrame::OnUpdateUiShmStart(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 
@@ -162,11 +162,11 @@ void  CMainFrame::OnUpdateUiNetStart(CCmdUI* pCmdUI)
     else if (pApp->m_state==SHM_EXEC) {
         pCmdUI->Enable(FALSE);
     }
-    //m_wndToolBar.GetToolBarCtrl().EnableButton(ID_NET_START, FALSE);
+    //m_wndToolBar.GetToolBarCtrl().EnableButton(ID_SHM_START, FALSE);
 }
 
 
-void  CMainFrame::OnUpdateUiNetStop(CCmdUI* pCmdUI)
+void  CMainFrame::OnUpdateUiShmStop(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 
@@ -182,7 +182,7 @@ void  CMainFrame::OnUpdateUiNetStop(CCmdUI* pCmdUI)
 }
 
 
-void  CMainFrame::OnUpdateUiMemSetting(CCmdUI* pCmdUI)
+void  CMainFrame::OnUpdateUiShmSetting(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 

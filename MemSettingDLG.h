@@ -7,35 +7,24 @@ class MemSettingDLG : public CDialog
     DECLARE_DYNAMIC(MemSettingDLG)
 
 public:
-    MemSettingDLG(NetParam netparam, CWnd* pParent = NULL);   // 標準コンストラクタ
+    MemSettingDLG(ShmParam p_shmparam, CWnd* pParent = NULL);   // 標準コンストラクタ
     virtual ~MemSettingDLG();
 
     virtual BOOL  OnInitDialog();
 
-    NetParam    GetParameter();
+    ShmParam    GetParameter();
 
 // ダイアログ データ
     enum { IDD = IDD_NETSETTING_DIALOG };
 
 protected:
-    NetParam    netparam;
+    ShmParam    shmparam;
 
-    BOOL        proxyMode;
-    int         localPort;
-    int         remotePort;
-    CString     remoteHost;
     BOOL        binHexMode;
     BOOL        dummy1;
     BOOL        dummy2;
 
-    CButton*    throwModeCBox;
-    CButton*    proxyModeCBox;
-
     CButton*    binHexCBox;
-
-    CEdit*      localPortEBox;
-    CEdit*      remotePortEBox;
-    CEdit*      remoteHostEBox;
 
 protected:
     virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV サポート

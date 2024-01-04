@@ -11,8 +11,9 @@
 #include "MainFrm.h"
 #include "SharedMemWinDoc.h"
 #include "SharedMemWinView.h"
+#include "WinSMTool.h"
 
-#include "TCP_thread.h"
+#include "SHM_thread.h"
 
 
 class CSharedMemWinApp : public CWinApp
@@ -26,8 +27,10 @@ public:
     CSharedMemWinDoc*   pMainDoc;
     CSharedMemWinView*  pMainView;
 
-    NetParam            m_netparam;
-    CWinThread*         m_server_thr;
+    jbxwl::CWinSharedMem* pShm;
+
+    ShmParam            m_shmparam;
+    CWinThread*         p_shm_thr;
 
     int                 m_state;
 

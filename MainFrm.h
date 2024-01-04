@@ -32,9 +32,9 @@ protected:  // コントロール バー用メンバ
 
 // 生成された、メッセージ割り当て関数
 protected:
-    afx_msg void  OnUpdateUiNetStart(CCmdUI* pCmdUI);
-    afx_msg void  OnUpdateUiNetStop(CCmdUI* pCmdUI);
-    afx_msg void  OnUpdateUiMemSetting(CCmdUI* pCmdUI);
+    afx_msg void  OnUpdateUiShmStart(CCmdUI* pCmdUI);
+    afx_msg void  OnUpdateUiShmStop(CCmdUI* pCmdUI);
+    afx_msg void  OnUpdateUiShmSetting(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiEditCopy(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiLogSave(CCmdUI* pCmdUI);
     afx_msg void  OnUpdateUiLogClear(CCmdUI* pCmdUI);
