@@ -362,7 +362,7 @@ void  CSharedMemWinView::OnMouseMove(UINT nFlags, CPoint point)
 
 CString  CSharedMemWinView::getCopyData(void)
 {
-    CString ret = "";
+    CString ret = TEXT("");
 
     CSharedMemWinDoc* pdoc = GetDocument();
     if (!pdoc || !pdoc->bufferRing) return ret;

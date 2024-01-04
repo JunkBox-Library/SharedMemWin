@@ -160,7 +160,7 @@ void  CSharedMemWinApp::OnLogSave()
     if (pMainDoc->save_fname=="") return;
     int ret = pMainDoc->writeLogFile();
 
-    if (ret<0) MessageBox(m_pMainWnd->m_hWnd, "ファイルの書き込みに失敗しました", "エラー", MB_OK);
+    if (ret<0) MessageBox(m_pMainWnd->m_hWnd, _T("ファイルの書き込みに失敗しました"), _T("エラー"), MB_OK);
 }
 
 
@@ -180,7 +180,9 @@ void  CSharedMemWinApp::OnEditCopy()
     HGLOBAL hMem = ::GlobalAlloc(GHND, data.GetLength());
     if (hMem == NULL) return;
     char* pszptr = (char*)::GlobalLock(hMem);
-    lstrcpy(pszptr, data);
+    //lstrcpy(pszptr, data);
+    memcpy(pszptr, data, data.GetLength());
+
     ::GlobalUnlock(hMem);
  
     if (!OpenClipboard(NULL)) {
@@ -216,7 +218,7 @@ void  CSharedMemWinApp::SHM_Start()
 
     pShm = new jbxwl::CWinSharedMem("jbxwl_DEBUGGER");
     if (pShm = NULL) {
-        MessageBox(m_pMainWnd->m_hWnd, "SHM_Setart: 共有メモリをオープンできません", "エラー", MB_OK);
+        MessageBox(m_pMainWnd->m_hWnd, _T("SHM_Setart: 共有メモリをオープンできません"), _T("エラー"), MB_OK);
     }
     else {
         m_state = SHM_EXEC;
@@ -260,6 +262,6 @@ void  CSharedMemWinApp::SHM_Setting()
 
 void  CSharedMemWinApp::OnLogClear()
 {
-    int ret = MessageBox(m_pMainWnd->m_hWnd, "ログをクリアしますか？", "Log Clear", MB_YESNO | MB_ICONQUESTION);
+    int ret = MessageBox(m_pMainWnd->m_hWnd, _T("ログをクリアしますか？"), _T("Log Clear"), MB_YESNO | MB_ICONQUESTION);
     if (ret==IDYES) pMainView->clearViewDoc();
 }

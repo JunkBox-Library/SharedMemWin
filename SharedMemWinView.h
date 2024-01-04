@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "afxwin.h"
+#include "stdafx.h"
 
 #define  DISPLAY_MARGIN  5
 

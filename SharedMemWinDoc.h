@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include   <Afxmt.h> 
+#include   <afxmt.h> 
 #include  "BufferRing.h"
 
 // 最大行数

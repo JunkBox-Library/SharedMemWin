@@ -31,9 +31,9 @@ typedef struct {
 
 
 UINT    shm_reader(LPVOID pntprm);
-void    shm_saveBuffer(Buffer* buf, ShmParam*p_shmparam, int input);
+void    shm_saveBuffer(Buffer* buf, ShmParam* p_shmparam, int input);
 
-void    shm_thread_stop(ShmParam*p_shmparam);
+void    shm_thread_stop(ShmParam* p_shmparam);
 
 
 #endif
