@@ -101,7 +101,7 @@
     </Midl>
     <ClCompile>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>..\JunkBox_Lib++\BasicLib\Lib;..\JunkBox_Lib++\BasicLib;..\magdb142;..\JunkBox_Lib++\ExtendLib\xLib;..\JunkBox_Lib++\ExtendLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\JunkBox_Lib++\BasicLib\Lib;..\JunkBox_Lib++\BasicLib;..\JunkBox_Lib++\ExtendLib\xLib;..\JunkBox_Lib++\ExtendLib;..\JunkBox_Win_Lib\WinBaseLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;_DEBUG;DISABLE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
@@ -164,7 +164,7 @@
       <ValidateAllParameters>false</ValidateAllParameters>
     </Midl>
     <ClCompile>
-      <AdditionalIncludeDirectories>..\JunkBox_Lib++\BasicLib\Lib;..\JunkBox_Lib++\BasicLib;..\JunkBox_Lib++\ExtendLib\xLib;..\JunkBox_Lib++\ExtendLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\JunkBox_Lib++\BasicLib\Lib;..\JunkBox_Lib++\BasicLib;..\JunkBox_Lib++\ExtendLib\xLib;..\JunkBox_Lib++\ExtendLib;..\JunkBox_Win_Lib\WinBaseLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PreprocessorDefinitions>WIN32;_WINDOWS;NDEBUG;DISABLE_ZLIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>

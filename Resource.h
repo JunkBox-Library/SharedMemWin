@@ -13,9 +13,9 @@
 #define IDC_EDIT_RPORT                  1004
 #define IDC_CHECK_BINHEX_MODE           1005
 
-#define ID_NET_START                    9001
-#define ID_NET_STOP                     9002
-#define ID_NET_SETTING                  9003
+#define ID_SHM_START                    9001
+#define ID_SHM_STOP                     9002
+#define ID_SHM_SETTING                  9003
 #define ID_LOG_SAVE                     9004
 #define ID_LOG_SAVE_AS                  9005
 #define ID_LOG_CLEAR                    9006

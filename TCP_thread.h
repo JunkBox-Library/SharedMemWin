@@ -14,9 +14,9 @@
 #include "SharedMemWinDoc.h"
 #include "SharedMemWinView.h"
 
-#define   RELAY_NOSET   0    // 中継不能（未設定）
-#define   RELAY_STOP    1    // 中継準備ＯＫ
-#define   RELAY_EXEC    2    // 中継中
+#define   SHM_NOSET   0    // 中継不能（未設定）
+#define   SHM_STOP    1    // 中継準備ＯＫ
+#define   SHM_EXEC    2    // 中継中
 
 
 //extern  tList*  Thread_List;

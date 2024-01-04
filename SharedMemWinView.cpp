@@ -58,7 +58,7 @@ CSharedMemWinView::~CSharedMemWinView()
 {    
     //DEBUG_Error("ディストラクタ：IN  CSharedMemWinView");
 
-    pApp->m_state = RELAY_STOP;
+    pApp->m_state = SHM_STOP;
 
     //DEBUG_Error("ディストラクタ：OUT CSharedMemWinView");
 }

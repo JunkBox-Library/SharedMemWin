@@ -39,7 +39,7 @@ CSharedMemWinDoc::~CSharedMemWinDoc()
 {
     //DEBUG_Error("ディストラクタ：IN  CSharedMemWinDoc");
 
-    pApp->m_state = RELAY_STOP;
+    pApp->m_state = SHM_STOP;
     CSharedMemWinDoc::free();
 
     //DEBUG_Error("ディストラクタ：OUT CSharedMemWinDoc");

@@ -23,8 +23,8 @@ public:
 
 public:
     CMainFrame*         pMainFrame;
-    CSharedMemWinDoc*    pMainDoc;
-    CSharedMemWinView*   pMainView;
+    CSharedMemWinDoc*   pMainDoc;
+    CSharedMemWinView*  pMainView;
 
     NetParam            m_netparam;
     CWinThread*         m_server_thr;
@@ -42,9 +42,9 @@ public:
     afx_msg  void    OnLogSave();
     afx_msg  void    OnLogSaveAs();
     afx_msg  void    OnEditCopy();
-    afx_msg  void    Server_Start();
-    afx_msg  void    Server_Stop();
-    afx_msg  void    Server_Setting();
+    afx_msg  void    SHM_Start();
+    afx_msg  void    SHM_Stop();
+    afx_msg  void    SHM_Setting();
     afx_msg  void    OnLogClear();
     afx_msg  void    OnAppAbout();
     DECLARE_MESSAGE_MAP()

@@ -5,6 +5,7 @@
 
 #include   <Afxmt.h> 
 #include  "BufferRing.h"
+#include  "WinSMTool.h"
 
 // 最大行数
 #define  MAXBUFFERLINE 50000
@@ -45,6 +46,8 @@ public:
     void        clear(void);
     int         writeLogFile(void);
     CString     easyGetSaveFileName(LPCSTR title, HWND hWnd);
+
+    jbxwl::CWinSharedMem* shm;
 
     void        DeleteContents(void);
     CSharedMemWinView*  GetView(void);

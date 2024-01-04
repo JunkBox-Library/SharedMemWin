@@ -20,9 +20,9 @@ using namespace jbxl;
 // Command
 BEGIN_MESSAGE_MAP(CSharedMemWinApp, CWinApp)
     ON_COMMAND(ID_EDIT_COPY,    &CSharedMemWinApp::OnEditCopy)
-    ON_COMMAND(ID_NET_START,    &CSharedMemWinApp::Server_Start)
-    ON_COMMAND(ID_NET_STOP,     &CSharedMemWinApp::Server_Stop)
-    ON_COMMAND(ID_NET_SETTING,  &CSharedMemWinApp::Server_Setting)
+    ON_COMMAND(ID_SHM_START,    &CSharedMemWinApp::SHM_Start)
+    ON_COMMAND(ID_SHM_STOP,     &CSharedMemWinApp::SHM_Stop)
+    ON_COMMAND(ID_SHM_SETTING,  &CSharedMemWinApp::SHM_Setting)
     ON_COMMAND(ID_LOG_SAVE,     &CSharedMemWinApp::OnLogSave)
     ON_COMMAND(ID_LOG_SAVE_AS,  &CSharedMemWinApp::OnLogSaveAs)
     ON_COMMAND(ID_LOG_CLEAR,    &CSharedMemWinApp::OnLogClear)
@@ -40,7 +40,7 @@ CSharedMemWinApp::CSharedMemWinApp()
     pMainFrame   = NULL;
     pMainDoc     = NULL;
     m_server_thr = NULL;
-    m_state      = RELAY_NOSET;
+    m_state      = SHM_NOSET;
 
     //m_netparam.hostname = "proxy.edu.tuis.ac.jp";
     //m_netparam.cport    = 8080;
@@ -71,7 +71,7 @@ CSharedMemWinApp::~CSharedMemWinApp()
     //    socket_close(m_netparam.ssock);
     //    m_netparam.ssock = 0;
     //}
-    Server_Stop();
+    SHM_Stop();
     cleanup_network();
 
     //DEBUG_Error("ディストラクタ：OUT CSharedMemWinApp");
@@ -221,40 +221,36 @@ void  CSharedMemWinApp::OnAppAbout()
 
 // CSharedMemWinApp メッセージ ハンドラ
 
-void  CSharedMemWinApp::Server_Start()
+void  CSharedMemWinApp::SHM_Start()
 {
-    if (m_state!=RELAY_STOP) return;
+    if (m_state!=SHM_STOP) return;
 
-    if (m_netparam.sport<=0) {
-        MessageBox(m_pMainWnd->m_hWnd, "Server_Setart: 不正なサーバポート番号です", "エラー", MB_OK);
+    pMainDoc->shm = new jbxwl::CWinSharedMem();
+
+    if (pMainDoc->shm = NULL) {
+        MessageBox(m_pMainWnd->m_hWnd, "SHM_Setart: 共有メモリをオープンできません", "エラー", MB_OK);
     }
     else {
-        m_netparam.ssock = tcp_server_socket_ipv4(m_netparam.sport);
-        if (m_netparam.ssock<=0) {
-            m_netparam.ssock = 0;
-            m_state = RELAY_STOP;
-            MessageBox(m_pMainWnd->m_hWnd, "ntpl_server: サーバポートのオープンに失敗", "エラー", MB_OK);
-            return;
-        }
-        m_state = RELAY_EXEC;
+        m_state = SHM_EXEC;
         m_server_thr = AfxBeginThread(ntpl_server, &m_netparam);
-        if (m_server_thr==NULL) m_state = RELAY_STOP;
+        if (m_server_thr==NULL) m_state = SHM_STOP;
     }
     return;
 }
 
 
-void  CSharedMemWinApp::Server_Stop()
+void  CSharedMemWinApp::SHM_Stop()
 {
-    m_state = RELAY_STOP;
-    if (m_netparam.ssock>0) {
-        socket_close(m_netparam.ssock);
-        m_netparam.ssock = 0;
+    m_state = SHM_STOP;
+
+    if (pMainDoc->shm!=NULL) {
+        delete(pMainDoc->shm);
+        pMainDoc->shm = NULL;
     }
 }
 
 
-void  CSharedMemWinApp::Server_Setting()
+void  CSharedMemWinApp::SHM_Setting()
 {
     MemSettingDLG* nstdlg = new MemSettingDLG(m_netparam);
     if (nstdlg==NULL) return;
@@ -264,7 +260,7 @@ void  CSharedMemWinApp::Server_Setting()
         m_netparam.pDoc  = pMainDoc;
         m_netparam.pView = pMainView;
         m_netparam.hwnd  = m_pMainWnd->m_hWnd;
-        m_state = RELAY_NOSET;
+        m_state = SHM_NOSET;
 
         if (!m_netparam.proxymode) {
             if (m_netparam.sport<=0 || m_netparam.hostname=="") {
@@ -274,7 +270,7 @@ void  CSharedMemWinApp::Server_Setting()
                 int cofd = tcp_client_socket((char*)(LPCSTR)(m_netparam.hostname), m_netparam.cport);
                 if (cofd>0) {
                     socket_close(cofd);
-                    m_state = RELAY_STOP;
+                    m_state = SHM_STOP;
                 }
                 else {
                     MessageBox(m_pMainWnd->m_hWnd, "Server_Setting: リモートホストに接続できません", "エラー", MB_OK);
@@ -282,7 +278,7 @@ void  CSharedMemWinApp::Server_Setting()
             }
         }
         else {
-            m_state = RELAY_STOP;
+            m_state = SHM_STOP;
         }
     }
 

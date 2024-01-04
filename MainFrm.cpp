@@ -128,18 +128,18 @@ void  CMainFrame::OnInitMenu(CMenu* pMenu)
 {
     if (pMenu==NULL) pMenu = GetMenu();
 
-    if (pApp->m_state==RELAY_NOSET) {        // 中継不能（未設定）
+    if (pApp->m_state==SHM_NOSET) {        // 中継不能（未設定）
         pMenu->EnableMenuItem(ID_NET_START,   MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
         pMenu->EnableMenuItem(ID_NET_STOP,    MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
         pMenu->EnableMenuItem(ID_NET_SETTING, MF_BYCOMMAND | MF_ENABLED);
         //m_wndToolBar.GetToolBarCtrl().EnableButton(ID_NET_START, FALSE);
     }
-    else if (pApp->m_state==RELAY_STOP) {    // 中継準備ＯＫ
+    else if (pApp->m_state==SHM_STOP) {    // 中継準備ＯＫ
         pMenu->EnableMenuItem(ID_NET_START,   MF_BYCOMMAND | MF_ENABLED);
         pMenu->EnableMenuItem(ID_NET_STOP,    MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
         pMenu->EnableMenuItem(ID_NET_SETTING, MF_BYCOMMAND | MF_ENABLED);
     }
-    else if (pApp->m_state==RELAY_EXEC) {    // 中継中
+    else if (pApp->m_state==SHM_EXEC) {    // 中継中
         pMenu->EnableMenuItem(ID_NET_START,      MF_BYCOMMAND | MF_DISABLED | MF_GRAYED);
         pMenu->EnableMenuItem(ID_NET_STOP,    MF_BYCOMMAND | MF_ENABLED);
         pMenu->EnableMenuItem(ID_NET_SETTING, MF_BYCOMMAND | MF_DISABLED | MF_GRAYED); 
@@ -153,13 +153,13 @@ void  CMainFrame::OnUpdateUiNetStart(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 
-    if (pApp->m_state==RELAY_NOSET) {
+    if (pApp->m_state==SHM_NOSET) {
         pCmdUI->Enable(FALSE);
     }
-    else if (pApp->m_state==RELAY_STOP) {
+    else if (pApp->m_state==SHM_STOP) {
         pCmdUI->Enable(TRUE);
     }
-    else if (pApp->m_state==RELAY_EXEC) {
+    else if (pApp->m_state==SHM_EXEC) {
         pCmdUI->Enable(FALSE);
     }
     //m_wndToolBar.GetToolBarCtrl().EnableButton(ID_NET_START, FALSE);
@@ -170,13 +170,13 @@ void  CMainFrame::OnUpdateUiNetStop(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 
-    if (pApp->m_state==RELAY_NOSET) {
+    if (pApp->m_state==SHM_NOSET) {
         pCmdUI->Enable(FALSE);
     }
-    else if (pApp->m_state==RELAY_STOP) {
+    else if (pApp->m_state==SHM_STOP) {
         pCmdUI->Enable(FALSE);
     }
-    else if (pApp->m_state==RELAY_EXEC) {
+    else if (pApp->m_state==SHM_EXEC) {
         pCmdUI->Enable(TRUE);
     }
 }
@@ -186,13 +186,13 @@ void  CMainFrame::OnUpdateUiMemSetting(CCmdUI* pCmdUI)
 {
     if (pApp==NULL) return;
 
-    if (pApp->m_state==RELAY_NOSET) {
+    if (pApp->m_state==SHM_NOSET) {
         pCmdUI->Enable(TRUE);
     }
-    else if (pApp->m_state==RELAY_STOP) {
+    else if (pApp->m_state==SHM_STOP) {
         pCmdUI->Enable(TRUE);
     }
-    else if (pApp->m_state==RELAY_EXEC) {
+    else if (pApp->m_state==SHM_EXEC) {
         pCmdUI->Enable(FALSE);
     }
 }

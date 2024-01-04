@@ -23,7 +23,7 @@ UINT  ntpl_server(LPVOID pntprm)
 
     NetParam netparam = *(NetParam*)pntprm;
 
-    while (*(netparam.p_state)==RELAY_EXEC) {
+    while (*(netparam.p_state)==SHM_EXEC) {
         cdlen = sizeof(cl_addr);
         sofd = accept(netparam.ssock, (struct sockaddr*)&cl_addr, (socklen_t*)&cdlen);
         if (sofd>0) {
@@ -112,7 +112,7 @@ UINT  ntpl_web_proxy(LPVOID pntprm)
     btm = wtm = tmout;
     keep = TRUE;
 
-    while (recv_wait(netparam.nsock, btm) && keep && *(netparam.p_state)==RELAY_EXEC) {
+    while (recv_wait(netparam.nsock, btm) && keep && *(netparam.p_state)==SHM_EXEC) {
         cc = recv_http_header(netparam.nsock, &pl, &len, tmout, NULL, &state);
         if (cc<=0) break;
         if (pl==NULL) break;
@@ -208,7 +208,7 @@ void  ntpl_tcp_relay(NetParam netparam)
         ntm = time(NULL);
     } while ((nd<0 || (!FD_ISSET(netparam.csock, &mask) && !FD_ISSET(netparam.nsock, &mask))) && (int)(ntm-otm)<=TIME_OUT);
 
-    while((FD_ISSET(netparam.csock, &mask) || FD_ISSET(netparam.nsock, &mask)) && *(netparam.p_state)==RELAY_EXEC) {
+    while((FD_ISSET(netparam.csock, &mask) || FD_ISSET(netparam.nsock, &mask)) && *(netparam.p_state)==SHM_EXEC) {
         if (FD_ISSET(netparam.csock, &mask)) {
             cc = tcp_recv_Buffer(netparam.csock, &buf);
             if (cc>0) {
@@ -431,7 +431,7 @@ void  ntpl_saveMessage(char* msg, NetParam netparam, int input)
 
 void  ntpl_thread_stop(NetParam netparam)
 {
-    *(netparam.p_state) = RELAY_STOP;
+    *(netparam.p_state) = SHM_STOP;
 
     /*
     tList* lp = Thread_List->next;
