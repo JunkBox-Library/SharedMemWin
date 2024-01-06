@@ -1,13 +1,13 @@
 //
-// SharedMemWin.RC2 - Microsoft Visual C++ �Œ��ڕҏW���Ȃ����\�[�X
+// SharedMemWin.RC2 - Microsoft Visual C++ で直接編集しないリソース
 //
 
 #ifdef APSTUDIO_INVOKED
-#error ���̃t�@�C���́AMicrosoft Visual C++ �ŕҏW�ł��܂���B
+#error このファイルは、Microsoft Visual C++ で編集できません。
 #endif //APSTUDIO_INVOKED
 
 
 /////////////////////////////////////////////////////////////////////////////
-// �蓮�ŕҏW���ꂽ��\�[�X�������ɒǉ����܂�...
+// 手動で編集されたりソースをここに追加します...
 
 /////////////////////////////////////////////////////////////////////////////

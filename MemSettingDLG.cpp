@@ -44,7 +44,7 @@ END_MESSAGE_MAP()
 
 BOOL   MemSettingDLG::OnInitDialog()
 {
-    binHexCBox       = (CButton*)GetDlgItem(IDC_CHECK_BINHEX_MODE);
+    binHexCBox = (CButton*)GetDlgItem(IDC_CHECK_BINHEX_MODE);
 
     if (binHexMode) {
         binHexCBox->SetCheck(BST_CHECKED);

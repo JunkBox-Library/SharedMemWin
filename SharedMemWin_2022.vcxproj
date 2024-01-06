@@ -93,6 +93,14 @@
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">false</LinkIncremental>
     <LinkIncremental Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkIncremental>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)$(Configuration)64\</OutDir>
+    <IntDir>$(Configuration)64\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IntDir>$(Configuration)64\</IntDir>
+    <OutDir>$(SolutionDir)$(Configuration)64\</OutDir>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Midl>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -235,6 +243,7 @@
     <ClCompile Include="SHM_thread.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\NetProtocol\NetProtocolDoc.h" />
     <ClInclude Include="BufferRing.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MemSettingDLG.h" />

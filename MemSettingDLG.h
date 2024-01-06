@@ -21,8 +21,8 @@ protected:
     ShmParam    shmparam;
 
     BOOL        binHexMode;
-    BOOL        dummy1;
-    BOOL        dummy2;
+    //BOOL        dummy1;
+    //BOOL        dummy2;
 
     CButton*    binHexCBox;
 

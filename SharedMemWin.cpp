@@ -41,7 +41,7 @@ CSharedMemWinApp::CSharedMemWinApp()
     pMainDoc   = NULL;
     pShm       = NULL;
     p_shm_thr  = NULL;
-    m_state    = SHM_NOSET;
+    m_state = SHM_STOP; // SHM_NOSET;
 
     m_shmparam.p_state = &m_state;
     m_shmparam.hwnd    = NULL;
@@ -216,7 +216,7 @@ void  CSharedMemWinApp::SHM_Start()
 {
     if (m_state!=SHM_STOP) return;
 
-    pShm = new jbxwl::CWinSharedMem("jbxwl_DEBUGGER");
+    pShm = new jbxwl::CWinSharedMem("jbxwl_SHM_DEBUGGER");
     if (pShm = NULL) {
         MessageBox(m_pMainWnd->m_hWnd, _T("SHM_Setart: 共有メモリをオープンできません"), _T("エラー"), MB_OK);
     }

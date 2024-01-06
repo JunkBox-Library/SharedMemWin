@@ -68,6 +68,9 @@
     <ClInclude Include="MemSettingDLG.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+    <ClInclude Include="..\NetProtocol\NetProtocolDoc.h">
+      <Filter>ヘッダー ファイル</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\SharedMemWin.ico">
